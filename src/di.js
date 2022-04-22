@@ -32,7 +32,6 @@ const credentialsController = new CredentialsController(credentialsService);
 const templatesController = new TemplatesController(templatesService);
 const subjectsController = new SubjectsController(subjectService);
 
-
 module.exports = {
   authService,
   credentialsService,

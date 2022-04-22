@@ -2,6 +2,8 @@ const express = require("express");
 const { subjectsController: controller } = require("../../di");
 const router = express.Router();
 
+router.get("/search", (req, res, next) => controller.search(req, res, next));
+
 router.get("", (req, res, next) => controller.find(req, res, next));
 router.get("/:id", (req, res, next) => controller.get(req, res, next));
 router.post("", (req, res, next) => controller.create(req, res, next));

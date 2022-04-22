@@ -6,12 +6,14 @@ const subjectSchema = new Schema({
   firstname: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    lowercase: true
   },
   lastname: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    lowercase: true
   },
   dni: {
     type: String,
@@ -20,6 +22,11 @@ const subjectSchema = new Schema({
     trim: true,
   },
   email: {
+    type: String,
+    trim: true,
+    lowercase: true
+  },
+  cuit: {
     type: String,
     trim: true,
   },
