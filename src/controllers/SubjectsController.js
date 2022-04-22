@@ -2,16 +2,6 @@ const Controller = require("./Controller");
 
 class SubjectsController extends Controller {
 
-  async find(req, res, next) {
-    try {
-      const filter = {}; //get filter from req
-      const result = await this.service.find(filter);
-      res.json({data: result})
-    } catch (err) {
-      next(err);
-    }
-  }
-
   async get(req, res, next) {
     try {
       const filter = {}; //TODO: Implement

@@ -5,26 +5,36 @@ const { Schema } = mongoose;
 const credentialSchema = new Schema({
   did: {
     type: String,
-    required: true
+    required: false, /* Solo si se emite */
+    default: "did:ethr:0x0000000000000000000000000000000000000000"
   },
   subject: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Subject"
   },
-  precredential: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "PreCredential"
+  data: {
+    type: {},
+    required: true,
   },
-  status: [], //enum? vigente o revocada?
+  template: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Template"
+  },
+  status: {
+    type: String,
+    enum: ["PENDING", "ACTIVE", "REVOKED"],
+    default: 'PENDING'
+  },
   statusHistory: []
 
   /* IssuanceDate? */
 
 
 
-}, {timestamps: true});
+}, { timestamps: true });
 
 
 
 const Credential = mongoose.model('Credential', credentialSchema);
 module.exports = Credential;
+

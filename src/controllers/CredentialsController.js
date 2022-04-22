@@ -1,14 +1,23 @@
 const Controller = require("./Controller");
 
 class CredentialsController extends Controller {
+  
 
-  async findCredentials(req, res, next) {
+  async create(req, res, next) {
     try {
-      res.json({msg: "Credentials Controller findCredentials"})
+      console.log(req.body)
+      /* Comprobar formato del body con joi, pero vamos a necesitar un subject y un template, ademas de los datos del template (en campo data)*/
+      const data = {...req.body}
+      /* Comprobar que data se ajuste al formato propuesto por el template */      
+      const created = await this.service.create(data);      
+
+      res.json({ data: created });
+
     } catch (err) {
       next(err);
     }
   }
+
   async revokeCredential(req, res, next) {
     try {
       res.json({msg: "Credentials Controller revokeCredential"})

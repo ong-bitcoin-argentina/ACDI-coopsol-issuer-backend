@@ -404,9 +404,124 @@ const beekeepers = [
   }
 ];
 
+const beekeepers2 = [
+  {
+    firstname: "Agricultores Federados Argentinos",
+    cuit:30525718626
+  },
+  {
+    firstname:"Almacen San Cayetano",
+    dni: 12300000 		
+  },
+  {
+    lastname: "Abrahm",
+    firstname:" Lucas",
+    dni: 37119605 		
+  },
+  {
+    lastname: "Almaraz",
+    firstname:" Esteban ",
+    dni: 34926972 		
+  },
+  {
+    lastname: "Andreis",
+    firstname:" Daniel Hugo",
+    cuit: "20222488851",
+    dni: 22248885 		
+  },
+  {
+    lastname: "Anrique",
+    firstname:" Teofilo",
+    cuit:"20234441273",
+    dni: 23444127 		
+  },
+  {
+    lastname: "Antonio",
+    firstname:" Javier Castillo Gutierres",
+    dni: 7236922
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Raul Viterman",
+    cuit: "20166997845",
+    dni: 16699784 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Alejandro A",
+    dni: 40032440 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Angel Antonio",
+    dni: 100000 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Cristian Gabriel",
+    cuit:"23259866359",
+    dni: 25986635 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Cristian Mauro",
+    cuit:"20307152313",
+    dni: 30715231 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Jose Domingo",
+    cuit:"20071872476",
+    dni: 7187247 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Jose Luis",
+    cuit:"20245971932",
+    dni: 24597193 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Karina Edith",
+    cuit:"27410167234",
+    dni: 41016723 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Omar Roberto",
+    cuit:"20166501602",
+    dni: 16650160 		
+  },
+  {
+    lastname: "Aranda",
+    firstname:" Victor Fabian",
+    dni: 22164401 		
+  },
+  {
+    lastname: "Araoz",
+    firstname:" Juan Ignacio",
+    cuit:"23254510599",
+    dni: 25451059 		
+  },
+  {
+    lastname: "Ardiles",
+    firstname:" Anacleto",
+    cuit:"20075136901",
+    dni: 7513690 		
+  },
+  {
+    lastname: "Ardiles",
+    firstname:" Rafael",
+    dni: 28704010 	
+  },
+]
+
+
+
+
 async function loadBeekepers() {
   console.log(`LOad beekepers`)
-  for(const beekeper of beekeepers){
+  for(const beekeper of beekeepers2){
     console.log(beekeper)
     try{
     await subjectService.create({
