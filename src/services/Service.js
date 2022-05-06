@@ -4,14 +4,14 @@ class Service {
     this.activity = activityService;
   }
 
-  async create(data) { //Moverlo al service
+  async create(data) { 
     const instance = new this.model(data);
     await instance.save();
     return instance;
   }
   
-  async find(filter = {}) {
-    return this.model.find(filter);
+  async find(filter = {}, sort) {
+    return this.model.find(filter).sort(sort);
   }
 
   log(severity, message){

@@ -10,7 +10,8 @@ const credentialSchema = new Schema({
   },
   subject: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Subject"
+    ref: "Subject",
+    required: true,
   },
   data: {
     type: {},
@@ -18,7 +19,8 @@ const credentialSchema = new Schema({
   },
   template: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Template"
+    ref: "Template",
+    required: true,
   },
   status: {
     type: String,
