@@ -9,13 +9,25 @@ class CredentialsController extends Controller {
       /* Comprobar formato del body con joi, pero vamos a necesitar un subject y un template, ademas de los datos del template (en campo data)*/
       const data = {...req.body}
       /* Comprobar que data se ajuste al formato propuesto por el template */      
-      const created = await this.service.create(data);      
+      const created = await this.service.create(data);
 
       res.json({ data: created });
 
     } catch (err) {
       next(err);
     }
+  }
+
+  async delete(req,res,next){
+    try{
+      const id = req.params.id;
+      const deleted = await this.service.delete(id);
+      return res.json({data: deleted});
+
+    } catch (err) {
+      next(err);
+    }
+
   }
 
   async revokeCredential(req, res, next) {
