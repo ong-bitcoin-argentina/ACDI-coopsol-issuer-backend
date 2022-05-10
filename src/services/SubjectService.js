@@ -21,9 +21,6 @@ class SubjectService extends Service {
     return this.model.find({ did });
   }
 
-  async update() {
-
-  }
   async delete() {
 
   }

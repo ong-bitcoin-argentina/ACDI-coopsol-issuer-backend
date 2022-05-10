@@ -9,6 +9,15 @@ class Service {
     await instance.save();
     return instance;
   }
+
+  async findById(id) {
+    return this.model.findById(id);
+  }
+
+  async update(id, data) {
+    console.log(`Service Update`,data);
+    return this.model.findByIdAndUpdate(id, {$set: {...data}}, {returnOriginal: false});
+  }
   
   async find(filter = {}, sort) {
     return this.model.find(filter).sort(sort);
