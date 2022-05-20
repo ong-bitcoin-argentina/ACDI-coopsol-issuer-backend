@@ -19,7 +19,8 @@ class DidiIssuerSdk {
     const path = "/cert";
     return {
       create: async (data, templateId) => {
-        const response = await axios.post(`${path}`, {
+        console.log(JSON.stringify(data))
+       const response = await axios.post(`${path}`, {
           data: JSON.stringify(data),
           templateId,
           microCredentials: [],

@@ -1,11 +1,16 @@
+const DidiIssuerSdk = require("../libs/DidiIssuerSdk");
+
+
+
 (async function () {
   const issuer = new DidiIssuerSdk();
-  //  const certs = await issuer.certs().find();
-  //  console.log(certs);
+
+  //const certs = await issuer.certs().find();
+  //console.log(certs);
 
   //const cert = await issuer.certs().get("62473e3ff899d6d4e1e68900");
   //console.log(cert)
-/*   const templateId = "62262ce12248912bdc580a36";
+  const PERSONAL_DATA_TEMPLATE = "62262ce12248912bdc580a36";
 
 
   const data = {
@@ -35,23 +40,27 @@
       [
         {
           "name": "DID",
-          "value": "did:ethr:0x7f3d1b4d87e5f3835be3e356ffdfddd66ccf6824"
+          "value": "did:ethr:0xd90245cca4e5efbbeb2c2f8e9f57c666fecfc2e7"
         }
       ]
     ],
     "others": []
-  };
+  }; 
 
 
-  const cert = await issuer.certs().create(data, templateId);
-  console.log(cert)
- */
+  const result = await issuer.certs().create(data, PERSONAL_DATA_TEMPLATE);
+  console.log(result[0]._id)
 
+  
+  const emmitedCert = await issuer.certs().emit(result[0]._id);
+  console.log(emmitedCert);
 
-  const credentialId = "626042e2451001b33f6bcf70";
-  const cert = await issuer.certs().emit(credentialId);
-  console.log(cert) 
-
+  /* 
+  const credentialId = "62703b28451001b33f6c79ca";
+  const emmited = await issuer.certs().emit(credentialId);
+  console.log(emmited)  */
+  console.log(`Done~!`)
+   
 /*   const newP = await issuer.participants().create({
 
   })

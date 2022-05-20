@@ -1,5 +1,12 @@
-class ActivityService {
-  constructor() {
+//Este servicio tiene metodos para ser usados de forma local (info, warn, and error)
+//Puede ser utilizado por otros servicios para crear actividades si fuera necesario
+
+const Service = require("./Service");
+
+class ActivityService extends Service {
+
+  async find(filter = {}, sort = { createdAt: -1 }) {
+    return this.model.find(filter).sort(sort);
   }
 
 

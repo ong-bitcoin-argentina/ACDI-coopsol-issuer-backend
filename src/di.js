@@ -4,6 +4,7 @@ const PreCredential = require("./models/PreCredential");
 const Subject = require("./models/Subject");
 const User = require("./models/User");
 const Template = require("./models/Template");
+const Activity = require("./models/Activity");
 
 
 const AuthService = require("./services/AuthService");
@@ -17,9 +18,10 @@ const AuthController = require("./controllers/AuthController");
 const CredentialsController = require("./controllers/CredentialsController");
 const TemplatesController = require("./controllers/TemplatesController");
 const SubjectsController = require("./controllers/SubjectsController");
+const ActivitiesController = require("./controllers/ActivitiesController");
 
-const activityService = new ActivityService();
-//pass acitivty service as activityService param
+
+const activityService = new ActivityService(Activity);
 
 const authService = new AuthService(User, activityService);
 const credentialsService = new CredentialsService(Credential, activityService);
@@ -31,6 +33,7 @@ const authController = new AuthController(authService);
 const credentialsController = new CredentialsController(credentialsService);
 const templatesController = new TemplatesController(templatesService);
 const subjectsController = new SubjectsController(subjectService);
+const activitiesController = new ActivitiesController(activityService);
 
 module.exports = {
   authService,
@@ -42,5 +45,7 @@ module.exports = {
   credentialsController,
   templatesController,
   subjectsController, 
+  activitiesController
 };
+
 

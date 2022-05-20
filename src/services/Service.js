@@ -24,6 +24,7 @@ class Service {
   }
 
   log(severity, message){
+    if(!this.activity) return;
     this.activity.log(severity, message);
   }
   info(message){
