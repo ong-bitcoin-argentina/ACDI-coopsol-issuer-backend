@@ -6,6 +6,8 @@ const templatesRouter = require("./api/templates");
 const identitiesRouter = require("./api/identities");
 const subjectsRouter = require("./api/subjects");
 const activitiesRouter = require("./api/activities");
+const authorized = require("../middleware/authorized");
+
 
 module.exports = app => {
   app.use("/credentials", credentialsRouter);
@@ -15,7 +17,7 @@ module.exports = app => {
   app.use("/auth", authRouter);
   app.use("/api/file", filesRouter);
   
-  app.use("/activities", activitiesRouter);
+  app.use("/activities", authorized, activitiesRouter); //add middleware
   
   //app.use("/action", actionsRouter);
   //app.use("/templates", templatesRouter);

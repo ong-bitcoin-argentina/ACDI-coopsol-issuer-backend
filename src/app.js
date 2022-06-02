@@ -17,7 +17,7 @@ app.use((err, req, res, next) => {
   }
 
   console.error(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).send(err.message)
 })
 
 app.listen(APP_PORT, async () => {

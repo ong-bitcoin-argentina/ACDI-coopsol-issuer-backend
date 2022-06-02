@@ -34,11 +34,10 @@ class AuthService extends Service {
     const token = jwt.sign({
       user: {
         id: user.id,
+        email: email
       },
     }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
-
-    //Loguemosnos en didi server qa
     const result = await new DidiIssuerSdk().auth().login({
       name: DIDI_USER,
       password: DIDI_PASSWORD,
