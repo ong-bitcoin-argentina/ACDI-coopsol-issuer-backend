@@ -1,7 +1,8 @@
 class Service {
-  constructor(model, activityService) {
+  constructor(model, activityService, context) {
     this.model = model;
     this.activity = activityService;
+    this.context = context;
   }
 
   async create(data) { 
@@ -22,6 +23,13 @@ class Service {
   async find(filter = {}, sort) {
     return this.model.find(filter).sort(sort);
   }
+
+
+  async delete(id){
+    const deleted = await this.model.findByIdAndDelete(id); 
+    return deleted;
+  }
+  
 
   log(severity, message){
     if(!this.activity) return;

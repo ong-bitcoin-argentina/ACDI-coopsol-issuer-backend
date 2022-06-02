@@ -34,7 +34,8 @@ class AuthService extends Service {
     const token = jwt.sign({
       user: {
         id: user.id,
-        email: email
+        email: email,
+        roles: user.roles
       },
     }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
@@ -47,6 +48,7 @@ class AuthService extends Service {
       user: {
         _id: user._id,
         email: user.email,
+        roles: user.roles,
       },
       token,
       tokenDidi: result?.token

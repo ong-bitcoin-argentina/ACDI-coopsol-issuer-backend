@@ -11,9 +11,7 @@ const authorized = (req,res,next) => {
     if(!token) {
       throw new UnauthorizedError();
     }
-  
-
-    //Returns the decoded payload without verifying if the signature is valid. check signature please!
+    
     const decoded = jwt.verify(token, JWT_SECRET);
     
     req.extra = {

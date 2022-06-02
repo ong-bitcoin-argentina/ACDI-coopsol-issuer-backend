@@ -13,16 +13,18 @@ const PreCredentialsService = require("./services/PreCredentialsService");
 const SubjectService = require("./services/SubjectService");
 const TemplatesService = require("./services/TemplatesService");
 const ActivityService = require("./services/ActivityService");
+const UsersService = require("./services/UsersService");
+
+
 
 const AuthController = require("./controllers/AuthController");
 const CredentialsController = require("./controllers/CredentialsController");
 const TemplatesController = require("./controllers/TemplatesController");
 const SubjectsController = require("./controllers/SubjectsController");
 const ActivitiesController = require("./controllers/ActivitiesController");
-
+const UsersController = require("./controllers/UsersController");
 
 const activityService = new ActivityService(Activity);
-
 const authService = new AuthService(User, activityService);
 const credentialsService = new CredentialsService(Credential, activityService);
 const preCredentialsService = new PreCredentialsService(PreCredential, activityService);
@@ -34,6 +36,11 @@ const credentialsController = new CredentialsController(credentialsService);
 const templatesController = new TemplatesController(templatesService);
 const subjectsController = new SubjectsController(subjectService);
 const activitiesController = new ActivitiesController(activityService);
+const usersService = new UsersService(User, activityService, {
+  authService: authService
+});
+
+const usersController = new UsersController(usersService)
 
 module.exports = {
   authService,
@@ -45,7 +52,8 @@ module.exports = {
   credentialsController,
   templatesController,
   subjectsController, 
-  activitiesController
+  activitiesController,
+  usersController
 };
 
 

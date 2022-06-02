@@ -18,9 +18,20 @@ const userSchema = new Schema({
   },
   active: {
     type: Boolean,
-    default: false,
+    default: true,
+  },
+  roles: {
+    type: [String],
+    default: ["BASIC"] //TODO: USE ENUM
+  },
+  privileges: {
+    type: [String],  
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   }
-
+  
 }, {timestamps: true});
 
 

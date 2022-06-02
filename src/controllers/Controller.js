@@ -53,7 +53,6 @@ class Controller {
 
 
   async update(req, res, next) {
-
     try {
       const id = req.params.id;
       const data = req.body;
@@ -67,6 +66,17 @@ class Controller {
 
   }
 
+  async delete(req,res,next){
+    try{
+      const id = req.params.id;
+      const deleted = await this.service.delete(id);
+      return res.json({data: deleted});
+
+    } catch (err) {
+      next(err);
+    }
+
+  }
 }
 
 module.exports = Controller;
