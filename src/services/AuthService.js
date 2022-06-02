@@ -2,10 +2,14 @@ const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const User = require("../models/User");
 const Service = require("./Service");
+const UnauthorizedError = require("../errors/UnauthorizedError");
+const DidiIssuerSdk = require("../libs/DidiIssuerSdk");
+
+const { DIDI_USER, DIDI_PASSWORD } = process.env;
 
 class AuthService extends Service {
 
-  async signup(data) { /* User data */
+  async signup(data) { /* User data, comprobar que venga con un token a llamar a esto, sino cualquier req va a crear un usuario */
     const { password, ...userData } = data;
     const user = new User({
       ...userData,
@@ -20,31 +24,35 @@ class AuthService extends Service {
     const { email, password } = data;
     const passwordHash = crypto.createHash("sha256").update(password, "utf8").digest("hex");
 
-    const users = await User.find({
+    const user = await User.findOne({
       email: email,
       passwordHash,
     });
 
-    if (users.length === 1) {
-      const user = users[0];
-      //Create jwt
-      const token = jwt.sign({
-        user: {
-          id: user.id
-        },
-      },process.env.JWT_SECRET,{ expiresIn: "2h" });
+    if (!user) throw new UnauthorizedError();
 
-      return {
-        user: {
-          _id: user._id,
-          email: user.email,
-        },
-        token
-      };
+    const token = jwt.sign({
+      user: {
+        id: user.id,
+      },
+    }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
-    } else {
-      throw new Error("Unauthorized");
-    }
+
+    //Loguemosnos en didi server qa
+    const result = await new DidiIssuerSdk().auth().login({
+      name: DIDI_USER,
+      password: DIDI_PASSWORD,
+    });   
+
+    return {
+      user: {
+        _id: user._id,
+        email: user.email,
+      },
+      token,
+      tokenDidi: result?.token
+    };
+
 
   }
 

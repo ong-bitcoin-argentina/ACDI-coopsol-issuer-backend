@@ -10,6 +10,16 @@ app.use(express.json());
 
 routes(app);
 
+app.use((err, req, res, next) => {
+
+  if(err.name === "Unauthorized"){
+    return res.status(401).send('Unauthorized');
+  }
+
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
+
 app.listen(APP_PORT, async () => {
   console.log(`App running on ${APP_PORT}`)
   await connect();

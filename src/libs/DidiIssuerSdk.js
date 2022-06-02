@@ -15,6 +15,19 @@ class DidiIssuerSdk {
   constructor() {
   }
 
+  auth(){
+    const path = "/user";
+    return {
+      login: async (credentials) => {
+        const response = await axios.post(`${path}/login`, credentials);
+        const { status, data: payload } = response.data;
+        if (status === "success") {
+          return payload;
+        } 
+      }
+    }
+  }
+
   certs() {
     const path = "/cert";
     return {
