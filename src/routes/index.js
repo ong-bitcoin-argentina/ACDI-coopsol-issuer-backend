@@ -11,14 +11,14 @@ const authorized = require("../middleware/authorized");
 
 module.exports = app => {
   app.use("/credentials", credentialsRouter);
-  app.use("/identities", identitiesRouter);
-  app.use("/subjects", subjectsRouter);
   
   app.use("/auth", authRouter);
-  app.use("/api/file", filesRouter);
   
-  app.use("/activities", authorized, activitiesRouter); //add middleware
+  app.use("/subjects", authorized, subjectsRouter);
+  app.use("/activities", authorized, activitiesRouter);
   
+  //app.use("/api/file", filesRouter);
+  //app.use("/identities", identitiesRouter);
   //app.use("/action", actionsRouter);
   //app.use("/templates", templatesRouter);
   //app.use("/identityValidationRequests", identitiesRouter); 
