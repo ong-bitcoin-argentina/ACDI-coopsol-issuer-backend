@@ -15,6 +15,11 @@ app.use((err, req, res, next) => {
   if(err.name === "Unauthorized"){
     return res.status(401).send('Unauthorized');
   }
+  //Use boom?
+  if(err.name === "TokenExpiredError"){
+    return res.status(401).send(err.message);
+  }
+
 
   console.error(err.stack)
   res.status(500).send(err.message)
