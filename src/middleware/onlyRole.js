@@ -7,7 +7,7 @@ const onlyRole = role => {
     try{
       const authorization = req.headers.authorization;
   
-      const [authScheme, token] = authorization?.split(" ");
+      const [authScheme, token] = authorization?.split(" ") || [];
     
       if(!token) {
         throw new UnauthorizedError();
