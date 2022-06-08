@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connect = require("./db/connect");
 const routes = require("./routes/index");
+const boom = require("@hapi/boom");
 
 const app = express();
 app.use(cors())
@@ -10,20 +11,29 @@ app.use(express.json());
 
 routes(app);
 
+const isDev = true;
+function withErrorStack(err, stack) {
+  if(isDev) {
+    return { ...err, stack };
+  }
+  return { ...err };
+}
+
+
+app.all("*", function (req, res, next) {
+  next(boom.notFound());
+});
+
 app.use((err, req, res, next) => {
-
-  if(err.name === "Unauthorized"){
-    return res.status(401).send('Unauthorized');
+  if(boom.isBoom(err)){
+    const { output: { statusCode, payload } } = err;
+    res.status(statusCode).json(withErrorStack(payload, err.stack));
+    next();
+  } else {
+    next(err);
   }
-  //Use boom?
-  if(err.name === "TokenExpiredError"){
-    return res.status(401).send(err.message);
-  }
+});
 
-
-  console.error(err.stack)
-  res.status(500).send(err.message)
-})
 
 app.listen(APP_PORT, async () => {
   console.log(`App running on ${APP_PORT}`)

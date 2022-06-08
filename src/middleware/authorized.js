@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const UnauthorizedError = require("../errors/UnauthorizedError");
+const boom = require("@hapi/boom");
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const authorized = (req,res,next) => {
@@ -9,7 +10,7 @@ const authorized = (req,res,next) => {
     const [authScheme, token] = authorization?.split(" ") || [];
   
     if(!token) {
-      throw new UnauthorizedError();
+      next(boom.unauthorized())
     }
     
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -22,6 +23,10 @@ const authorized = (req,res,next) => {
   
   
   } catch(err){
+    
+    if(["JsonWebTokenError","TokenExpiredError"].includes(err.name)){
+      return next(boom.unauthorized(err.name))
+    }
     next(err);
   }
 

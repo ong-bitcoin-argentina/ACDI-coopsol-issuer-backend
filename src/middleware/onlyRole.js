@@ -1,34 +1,38 @@
 const jwt = require("jsonwebtoken");
-const UnauthorizedError = require("../errors/UnauthorizedError");
+const boom = require("@hapi/boom");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const onlyRole = role => {
-  return (req,res,next) => {
-    try{
+  return (req, res, next) => {
+    try {
       const authorization = req.headers.authorization;
-  
+
       const [authScheme, token] = authorization?.split(" ") || [];
-    
-      if(!token) {
-        throw new UnauthorizedError();
+
+      if (!token) {
+        next(boom.unauthorized());
       }
       const decoded = jwt.verify(token, JWT_SECRET);
-      
-      if(!(decoded?.user?.roles?.includes(role))){
-        throw new UnauthorizedError();
+
+      if (!(decoded?.user?.roles?.includes(role))) {
+        next(boom.forbidden());
       }
 
       req.extra = {
         user: decoded.user
       }
-    
+
       next();
-    
-    
-    } catch(err){
+
+
+    } catch (err) {
+      if(["JsonWebTokenError","TokenExpiredError"].includes(err.name)){
+        return next(boom.unauthorized(err.name))
+      }
+      
       next(err);
     }
   }
-} 
+}
 
 module.exports = onlyRole;
