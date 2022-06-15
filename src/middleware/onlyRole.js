@@ -10,12 +10,12 @@ const onlyRole = role => {
       const [authScheme, token] = authorization?.split(" ") || [];
 
       if (!token) {
-        next(boom.unauthorized());
+        return next(boom.unauthorized());
       }
       const decoded = jwt.verify(token, JWT_SECRET);
 
       if (!(decoded?.user?.roles?.includes(role))) {
-        next(boom.forbidden());
+        return next(boom.forbidden());
       }
 
       req.extra = {

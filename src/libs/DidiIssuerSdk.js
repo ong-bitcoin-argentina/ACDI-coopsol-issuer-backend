@@ -1,11 +1,10 @@
 const Axios = require("axios").default;
 
 const ISSUER_URI = process.env.ISSUER_URI;
-const token = process.env.ISSUER_TOKEN;
-
+const token = process.env.ISSUER_TOKEN; //Deprecar esto!
+ 
 const axios = Axios.create({
   baseURL: ISSUER_URI,
-
   headers: { 'token': token }
 });
 

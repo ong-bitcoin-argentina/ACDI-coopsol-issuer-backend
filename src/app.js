@@ -39,6 +39,7 @@ app.listen(APP_PORT, async () => {
   console.log(`App running on ${APP_PORT}`)
   await connect();
   console.log(`Db connected`);
+  console.log(`Using issuer backend at: ${process.env.ISSUER_URI}`)
 
 })
 

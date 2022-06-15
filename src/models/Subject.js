@@ -28,6 +28,10 @@ const subjectSchema = new Schema({
     type: String,
     trim: true,
   },
+  nationality: {
+    type: String,
+    trim: true,
+  },
   phoneNumber: String,
   did: {
     type: String,

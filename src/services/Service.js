@@ -16,7 +16,6 @@ class Service {
   }
 
   async update(id, data) {
-    console.log(`Service Update`,data);
     return this.model.findByIdAndUpdate(id, {$set: {...data}}, {returnOriginal: false});
   }
   

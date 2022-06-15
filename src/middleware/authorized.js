@@ -10,7 +10,7 @@ const authorized = (req,res,next) => {
     const [authScheme, token] = authorization?.split(" ") || [];
   
     if(!token) {
-      next(boom.unauthorized())
+      return next(boom.unauthorized())
     }
     
     const decoded = jwt.verify(token, JWT_SECRET);

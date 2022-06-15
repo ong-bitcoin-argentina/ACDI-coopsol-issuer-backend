@@ -15,7 +15,7 @@ class SubjectService extends Service {
   }
 
   async findByDni(dni) {
-    return this.model.find({ dni });
+    return this.model.findOne({ dni });
   }
   async findByDid(did) {
     return this.model.find({ did });

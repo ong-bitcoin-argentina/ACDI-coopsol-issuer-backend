@@ -18,9 +18,9 @@ module.exports = app => {
   
   app.use("/subjects", authorized, subjectsRouter);
   app.use("/activities", authorized, activitiesRouter);
+  app.use("/identities", identitiesRouter);
   
   //app.use("/api/file", filesRouter);
-  //app.use("/identities", identitiesRouter);
   //app.use("/action", actionsRouter);
   //app.use("/templates", templatesRouter);
   //app.use("/identityValidationRequests", identitiesRouter); 

@@ -23,6 +23,7 @@ const TemplatesController = require("./controllers/TemplatesController");
 const SubjectsController = require("./controllers/SubjectsController");
 const ActivitiesController = require("./controllers/ActivitiesController");
 const UsersController = require("./controllers/UsersController");
+const IdentitiesController = require("./controllers/IdentitiesController");
 
 const activityService = new ActivityService(Activity);
 const authService = new AuthService(User, activityService);
@@ -36,6 +37,8 @@ const credentialsController = new CredentialsController(credentialsService);
 const templatesController = new TemplatesController(templatesService);
 const subjectsController = new SubjectsController(subjectService);
 const activitiesController = new ActivitiesController(activityService);
+const identitiesController = new IdentitiesController(subjectService);
+
 const usersService = new UsersService(User, activityService, {
   authService: authService
 });
@@ -53,7 +56,8 @@ module.exports = {
   templatesController,
   subjectsController, 
   activitiesController,
-  usersController
+  identitiesController,
+  usersController,
 };
 
 
