@@ -1,8 +1,9 @@
 class Service {
-  constructor(model, activityService, context) {
+  constructor(model, activityService, context, emitter) {
     this.model = model;
     this.activity = activityService;
     this.context = context;
+    this.emitter = emitter;
   }
 
   async create(data) { 

@@ -1,12 +1,13 @@
 const Controller = require("./Controller");
 const jwt = require("jsonwebtoken");
 const boom = require("@hapi/boom");
-const JWT_SECRET = process.env.JWT_SECRET;
+
 
 class IdentitiesController extends Controller {
-  constructor(service) {
+  constructor(service, emitter) {
     super(service);
     this.subjectsService = service;
+    this.emitter = emitter;
   }
 
   async processIdentity(req, res, next){
@@ -47,6 +48,8 @@ class IdentitiesController extends Controller {
       }
 
       //Emitir evento al front para indicarle que se recibieron las credenciales de firstname, lastname 
+      console.log("Emit producer-did-associated")
+      this.emitter.emit("producer-did-associated", {_id: subject._id, firstname, lastname, did});
 
       res.json(subject);
 

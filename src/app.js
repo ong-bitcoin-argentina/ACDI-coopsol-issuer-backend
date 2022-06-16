@@ -3,6 +3,7 @@ const cors = require("cors");
 const connect = require("./db/connect");
 const routes = require("./routes/index");
 const boom = require("@hapi/boom");
+const createServer = require("./socket");
 
 const app = express();
 app.use(cors())
@@ -34,12 +35,12 @@ app.use((err, req, res, next) => {
   }
 });
 
+const server = createServer(app);
 
-app.listen(APP_PORT, async () => {
-  console.log(`App running on ${APP_PORT}`)
+server.listen(APP_PORT, async () => {
+  console.log(`Server running on ${APP_PORT}`)
   await connect();
   console.log(`Db connected`);
   console.log(`Using issuer backend at: ${process.env.ISSUER_URI}`)
-
 })
 
