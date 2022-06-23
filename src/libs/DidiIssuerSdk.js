@@ -1,12 +1,13 @@
 const Axios = require("axios").default;
 
 const ISSUER_URI = process.env.ISSUER_URI;
-const token = process.env.ISSUER_TOKEN; //Deprecar esto!
  
 const axios = Axios.create({
   baseURL: ISSUER_URI,
-  headers: { 'token': token }
 });
+
+/* TODO: Implementar mecanismo de autenticacion en caso de que se realicen llamadas
+desde este backend al backend del issuer */
 
 /* Abstraer aca toda la logica de llamadas a traves de axios */
 

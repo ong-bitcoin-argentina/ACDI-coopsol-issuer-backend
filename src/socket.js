@@ -32,7 +32,7 @@ const createServer = app => {
     console.log(`Connected: ${socket.id}`)
   });
 
-  console.log(`Add listener to producer-did-associated`)
+
   emitter.on("producer-did-associated", payload => {
     io.emit("producer-did-associated", payload)
   });

@@ -38,9 +38,15 @@ app.use((err, req, res, next) => {
 const server = createServer(app);
 
 server.listen(APP_PORT, async () => {
-  console.log(`Server running on ${APP_PORT}`)
-  await connect();
-  console.log(`Db connected`);
-  console.log(`Using issuer backend at: ${process.env.ISSUER_URI}`)
+  try{
+    console.log(`Coopsol server running on ${APP_PORT}`)
+    await connect();
+    console.log(`Db connected`);
+    console.log(`Using issuer backend at: ${process.env.ISSUER_URI}`)
+
+  } catch(err){
+    console.log(err);
+    process.exit(1);
+  }
 })
 

@@ -39,7 +39,7 @@ class AuthService extends Service {
       },
     }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
-    const result = await new DidiIssuerSdk().auth().login({
+    const result = await new DidiIssuerSdk().auth().login({ //TODO: Crear usuarios en el issuer backend
       name: DIDI_USER,
       password: DIDI_PASSWORD,
     });   

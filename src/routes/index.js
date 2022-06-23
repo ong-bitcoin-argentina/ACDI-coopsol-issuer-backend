@@ -11,6 +11,15 @@ const authorized = require("../middleware/authorized");
 const onlyRole = require("../middleware/onlyRole");
 
 module.exports = app => {
+  app.get("/", (req,res,next) => {
+    res.json({
+      status: "success",
+      data: {
+        name: "Coopsol backend", //TODO: read from package.json
+        version: "1.0.0"
+      }
+    })
+  });
   app.use("/credentials", credentialsRouter);
   
   app.use("/auth", authRouter);
