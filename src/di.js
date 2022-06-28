@@ -24,7 +24,7 @@ const TemplatesController = require("./controllers/TemplatesController");
 const SubjectsController = require("./controllers/SubjectsController");
 const ActivitiesController = require("./controllers/ActivitiesController");
 const UsersController = require("./controllers/UsersController");
-const IdentitiesController = require("./controllers/IdentitiesController");
+const DniIdentitiesController = require("./controllers/DniIdentitiesController");
 
 const emitter = new EventEmitter();
 
@@ -40,7 +40,7 @@ const credentialsController = new CredentialsController(credentialsService);
 const templatesController = new TemplatesController(templatesService);
 const subjectsController = new SubjectsController(subjectService);
 const activitiesController = new ActivitiesController(activityService);
-const identitiesController = new IdentitiesController(subjectService, emitter);
+const dniIdentitiesController = new DniIdentitiesController(subjectService, emitter);
 
 const usersService = new UsersService(User, activityService, {
   authService: authService
@@ -61,7 +61,7 @@ module.exports = {
   templatesController,
   subjectsController,
   activitiesController,
-  identitiesController,
+  dniIdentitiesController,
   usersController,
   emitter
 };

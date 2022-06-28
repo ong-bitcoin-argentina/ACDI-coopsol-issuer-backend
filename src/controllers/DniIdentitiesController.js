@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const boom = require("@hapi/boom");
 
 
-class IdentitiesController extends Controller {
+class DniIdentitiesController extends Controller {
   constructor(service, emitter) {
     super(service);
     this.subjectsService = service;
@@ -60,4 +60,4 @@ class IdentitiesController extends Controller {
   }
 
 }
-module.exports = IdentitiesController;
+module.exports = DniIdentitiesController;
