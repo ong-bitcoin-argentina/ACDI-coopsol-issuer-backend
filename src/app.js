@@ -65,7 +65,7 @@ async function bootstrap() {
 
     const { COOPSOL_CREATE_USER, COOPSOL_BACKEND_USER, COOPSOL_BACKEND_PASSWORD } = process.env;
 
-    const createUser = (COOPSOL_CREATE_USER.toLowerCase() === 'true');
+    const createUser = (COOPSOL_CREATE_USER?.toLowerCase() === 'true');
 
     if (createUser) {
 
