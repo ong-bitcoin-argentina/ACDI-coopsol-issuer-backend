@@ -24,6 +24,9 @@ class Service {
     return this.model.find(filter).sort(sort);
   }
 
+  async findOne(filter = {}) {
+    return this.model.findOne(filter);
+  }
 
   async delete(id){
     const deleted = await this.model.findByIdAndDelete(id); 
