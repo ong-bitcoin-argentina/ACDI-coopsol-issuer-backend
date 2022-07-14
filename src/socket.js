@@ -24,6 +24,7 @@ const createServer = app => {
     } catch (err) {
       if(err instanceof jwt.TokenExpiredError){
         console.log(`[${new Date().toISOString()}][Socket] jwt expired`)
+        next(new Error("TokenExpiredError"))
       } else {
         console.log(err);
       }
