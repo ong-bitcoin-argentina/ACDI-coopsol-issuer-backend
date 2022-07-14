@@ -22,7 +22,12 @@ const createServer = app => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       next();
     } catch (err) {
-      console.log(err);
+      if(err instanceof jwt.TokenExpiredError){
+        console.log(`[${new Date().toISOString()}][Socket] jwt expired`)
+      } else {
+        console.log(err);
+      }
+
       next(err);
     }
   })
