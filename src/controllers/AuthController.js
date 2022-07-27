@@ -1,3 +1,4 @@
+const boom = require("@hapi/boom");
 const Controller = require("./Controller");
 
 
@@ -10,7 +11,7 @@ class AuthController extends Controller {
         email: req.body.username
       });
       return res.json(result);
-    } catch (err) { 
+    } catch (err) {
       next(err);
     }
   }
@@ -21,6 +22,31 @@ class AuthController extends Controller {
         ...req.body,
         email: req.body.username
       });
+      return res.json(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+  async changePassword(req, res, next) {
+    try {
+      const userId = req.extra.user.id;
+      
+      if(!userId){
+        next(boom.unauthorized())
+      }
+
+      const { newPassword, repeatNewPassword } = req.body;
+      if(newPassword !== repeatNewPassword){
+        next(boom.badData("Las contraseñas no coinciden"))
+      }
+
+      const result = await this.service.changePassword({
+        userId,
+        password: newPassword
+      });
+
       return res.json(result);
     } catch (err) {
       next(err);

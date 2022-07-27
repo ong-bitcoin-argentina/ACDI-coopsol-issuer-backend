@@ -7,13 +7,18 @@ const DidiIssuerSdk = require("../libs/DidiIssuerSdk");
 
 const { DIDI_USER, DIDI_PASSWORD } = process.env;
 
+
+function hashPassword(password){
+  return crypto.createHash("sha256").update(password, "utf8").digest("hex"); //TODO: add salt
+}
+
 class AuthService extends Service {
 
   async signup(data) { /* User data, comprobar que venga con un token a llamar a esto, sino cualquier req va a crear un usuario */
     const { password, ...userData } = data;
     const user = new User({
       ...userData,
-      passwordHash: crypto.createHash("sha256").update(password, "utf8").digest("hex")
+      passwordHash: hashPassword(password)
     });
     const { _id, email } = await user.save();
 
@@ -22,7 +27,7 @@ class AuthService extends Service {
 
   async login(data) {
     const { email, password } = data;
-    const passwordHash = crypto.createHash("sha256").update(password, "utf8").digest("hex");
+    const passwordHash = hashPassword(password);
 
     const user = await User.findOne({
       email: email,
@@ -42,7 +47,7 @@ class AuthService extends Service {
     const result = await new DidiIssuerSdk().auth().login({ //TODO: Crear usuarios en el issuer backend
       name: DIDI_USER,
       password: DIDI_PASSWORD,
-    });   
+    });
 
     return {
       user: {
@@ -53,10 +58,16 @@ class AuthService extends Service {
       token,
       tokenDidi: result?.token
     };
-
-
   }
 
+
+  async changePassword(data) {
+    const { userId, password } = data;
+    const user = await User.findById(userId);
+    user.passwordHash = hashPassword(password);
+    await user.save();
+    return user;
+  }
 
 }
 
