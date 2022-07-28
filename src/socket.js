@@ -43,6 +43,10 @@ const createServer = app => {
     io.emit("producer-did-associated", payload)
   });
 
+  emitter.on("identity-validation-request", payload => {
+    io.emit("identity-validation-request", payload)
+  });
+
 
   return server;
 }

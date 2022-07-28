@@ -1,8 +1,8 @@
 const express = require("express");
 
 const router = express.Router();
-const { dniIdentitiesController } = require("../../di");
+const { identitiesController } = require("../../di");
 
-router.post("/", (req,res,next) => dniIdentitiesController.processIdentity(req,res,next));
+router.post("/", (req,res,next) => identitiesController.processIdentity(req,res,next));
 
 module.exports = router;

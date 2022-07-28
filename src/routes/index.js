@@ -4,6 +4,7 @@ const actionsRouter = require("./api/actions");
 const filesRouter = require("./api/file");
 const templatesRouter = require("./api/templates");
 const dniIdentitiesRouter = require("./api/dni-identities");
+const identitiesRouter = require("./api/identities");
 const subjectsRouter = require("./api/subjects");
 const activitiesRouter = require("./api/activities");
 const usersRouter = require("./api/users");
@@ -28,6 +29,7 @@ module.exports = app => {
   app.use("/subjects", authorized, subjectsRouter);
   app.use("/activities", authorized, activitiesRouter);
   app.use("/api/v1/dni-identity", dniIdentitiesRouter);
+  app.use("/api/v1/identity", identitiesRouter);
   
   //app.use("/api/file", filesRouter);
   //app.use("/action", actionsRouter);
