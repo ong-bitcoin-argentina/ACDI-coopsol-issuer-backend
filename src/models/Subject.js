@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+/* Esquema que representa a un productor apicola. 
+  Se le dio el nombre de subject por ser el sujeto de la credencial 
+  https://www.w3.org/TR/vc-data-model/
+*/
 const subjectSchema = new Schema({
   firstname: {
     type: String,

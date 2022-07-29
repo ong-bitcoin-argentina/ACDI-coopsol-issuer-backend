@@ -1,6 +1,6 @@
 {
   "name": "coopsol-backend",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "src/app.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jonatan Duttweiler <jonatanduttweiler@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "^10.0.0",

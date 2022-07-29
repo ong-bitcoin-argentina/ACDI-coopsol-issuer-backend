@@ -1,28 +1,19 @@
+const infoRouter = require("./api/info");
 const authRouter = require("./api/auth");
-const credentialsRouter = require("./api/credentials");
-const actionsRouter = require("./api/actions");
-const filesRouter = require("./api/file");
-const templatesRouter = require("./api/templates");
 const dniIdentitiesRouter = require("./api/dni-identities");
 const identitiesRouter = require("./api/identities");
 const subjectsRouter = require("./api/subjects");
 const activitiesRouter = require("./api/activities");
 const usersRouter = require("./api/users");
+//const filesRouter = require("./api/file");
+
+
 const authorized = require("../middleware/authorized");
 const onlyRole = require("../middleware/onlyRole");
 
 module.exports = app => {
-  app.get("/", (req,res,next) => {
-    res.json({
-      status: "success",
-      data: {
-        name: "Coopsol backend", //TODO: read from package.json
-        version: "1.0.0"
-      }
-    })
-  });
-  app.use("/credentials", credentialsRouter);
-  
+
+  app.use("/", infoRouter)
   app.use("/auth", authRouter);
   app.use("/users", onlyRole("ADMIN"),usersRouter);
   
@@ -33,7 +24,6 @@ module.exports = app => {
   app.use("/identityValidationRequests", identitiesRouter); 
   
   //app.use("/api/file", filesRouter);
-  //app.use("/action", actionsRouter);
-  //app.use("/templates", templatesRouter);
+  
 
 }
