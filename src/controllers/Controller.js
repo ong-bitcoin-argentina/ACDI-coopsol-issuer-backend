@@ -56,7 +56,7 @@ class Controller {
     try {
       const id = req.params.id;
       const data = req.body;
-      console.log(`Controller update`, this.service)
+      
       const result = await this.service.update(id, data);
       res.json({ data: result })
 

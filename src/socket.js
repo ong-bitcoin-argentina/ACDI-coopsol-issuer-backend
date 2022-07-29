@@ -48,6 +48,15 @@ const createServer = app => {
   });
 
 
+  emitter.on("new-producer", payload => {
+    io.emit("new-producer", payload)
+  });
+  
+  emitter.on("updated-producer", payload => {
+    io.emit("updated-producer", payload)
+  });
+
+
   return server;
 }
 

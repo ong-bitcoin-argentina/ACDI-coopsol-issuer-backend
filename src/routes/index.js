@@ -30,10 +30,10 @@ module.exports = app => {
   app.use("/activities", authorized, activitiesRouter);
   app.use("/api/v1/dni-identity", dniIdentitiesRouter);
   app.use("/api/v1/identity", identitiesRouter);
+  app.use("/identityValidationRequests", identitiesRouter); 
   
   //app.use("/api/file", filesRouter);
   //app.use("/action", actionsRouter);
   //app.use("/templates", templatesRouter);
-  //app.use("/identityValidationRequests", dniIdentitiesRouter); 
 
 }

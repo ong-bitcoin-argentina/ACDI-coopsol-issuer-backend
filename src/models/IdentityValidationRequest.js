@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
+
+const validationStatus = {
+  "IN_PROGRESS": "IN_PROGRESS",
+  "ACCEPTED": "ACCEPTED",
+  "REJECTED": "REJECTED",
+}
 
 const identityValidationSchema = new Schema({
   firstname: {
@@ -28,8 +33,15 @@ const identityValidationSchema = new Schema({
     trim: true,
   },
   status: {
-    type: String, /* Usar enum, "", "ACCEPTED","REJECTED", default: null sino""*/
-    trim: true,
+    type: String,
+    enum: Object.keys(validationStatus),
+    default: "IN_PROGRESS"
+  },
+  rejectionCause: {
+    type: String,
+  },
+  rejectionObservation: {
+    type: String,
   },
   phoneNumber: String,
   did: {
@@ -43,3 +55,4 @@ const identityValidationSchema = new Schema({
 
 const IdentityValidationRequest = mongoose.model('IdentityValidationRequest', identityValidationSchema);
 module.exports = IdentityValidationRequest;
+IdentityValidationRequest.validationStatus = validationStatus;
